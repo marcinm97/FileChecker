@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Marcin/CLionProjects/FileChecker/FileChecker.h
+
+C:/Users/Marcin/CLionProjects/FileChecker/main.cpp
+iostream
+-
+FileChecker.h
+C:/Users/Marcin/CLionProjects/FileChecker/FileChecker.h
+experimental/filesystem
+-
+thread
+-
+

@@ -1,0 +1,3 @@
+C:/Users/Marcin/CLionProjects/FileChecker/cmake-build-debug/CMakeFiles/FileChecker.dir
+C:/Users/Marcin/CLionProjects/FileChecker/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Marcin/CLionProjects/FileChecker/cmake-build-debug/CMakeFiles/rebuild_cache.dir
