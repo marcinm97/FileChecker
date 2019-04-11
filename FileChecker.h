@@ -7,7 +7,7 @@
 #include <chrono>
 #include <string>
 #include <functional>
-#include <experimental/algorithm>
+//#include <experimental/algorithm>
 
 
 enum class State {Created, Modified, Removed};
@@ -20,7 +20,9 @@ private:
     std::string main_path;
 
     bool contains(const std::string& file_name){
-        return std::find(paths_.begin(), paths_.end(), file_name) != paths_.end();
+        // return std::find_if(paths_.begin(), paths_.end(), [file_name](const auto& pair){
+        // return pair.first == file_name;}) != paths_.end();
+        return paths_.find(file_name) != paths_.end();
     }
 public:
     FileChecker(const std::string& file_path, std::chrono::duration<int, std::milli> delay): main_path(file_path),
@@ -59,7 +61,6 @@ public:
 
         }
     }
-
 };
 
 #endif //FILECHECKER_FILECHECKER_H
