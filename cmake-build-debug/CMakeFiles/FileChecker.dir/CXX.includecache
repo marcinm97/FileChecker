@@ -7,14 +7,24 @@
 #IncludeRegexTransform: 
 
 C:/Users/Marcin/CLionProjects/FileChecker/FileChecker.h
+experimental/filesystem
+-
+thread
+-
+unordered_map
+-
+chrono
+-
+string
+-
+functional
+-
+experimental/algorithm
+-
 
 C:/Users/Marcin/CLionProjects/FileChecker/main.cpp
 iostream
 -
 FileChecker.h
 C:/Users/Marcin/CLionProjects/FileChecker/FileChecker.h
-experimental/filesystem
--
-thread
--
 
