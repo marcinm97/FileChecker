@@ -31,7 +31,7 @@ public:
             paths_[f.path().string()] = filesystem::last_write_time(f);     // add path as a key, and time data as a value
     }
 
-    void startChecking(const std::function<void(std::string, State)>& validate){
+    void startChecking(const std::function<void(const std::string&, State)>& validate){
         while(true){  // infinity loop
             std::this_thread::sleep_for(delay_);    // set refresh every "delay_" seconds
 
