@@ -7,7 +7,6 @@
 #include <chrono>
 #include <string>
 #include <functional>
-//#include <experimental/algorithm>
 
 
 enum class State {Created, Modified, Removed};
@@ -32,16 +31,20 @@ public:
     }
 
     void startChecking(const std::function<void(const std::string&, State)>& validate){
+
         while(true){  // infinity loop
             std::this_thread::sleep_for(delay_);    // set refresh every "delay_" seconds
 
             // checking if one of the files was erased
-            for(auto&[path, time]: paths_){
-                if(!filesystem::exists(path)){
-                    validate(path, State::Removed);
-                    paths_.erase(path);             // delete erased path
-                }
+            auto it(paths_.begin());
+            for(;it!=paths_.end();){
+              if(!filesystem::exists(it->first)){
+                  validate(it->first, State::Removed);
+                  paths_.erase(it++);
+              }
+              else it++;
             }
+
 
             for(auto& file: filesystem::recursive_directory_iterator(main_path)){
                 auto lastWriteTime(filesystem::last_write_time(file));

@@ -1,8 +1,10 @@
 #include <iostream>
 #include "FileChecker.h"
+#include <algorithm>
 
 int main() {
 
+using namespace std::experimental;
     auto delay(std::chrono::milliseconds(5000));
     FileChecker monit{filesystem::current_path().string(), delay};
 
@@ -28,6 +30,8 @@ int main() {
     });
 
     monit.startChecking(disp_Alert);
+
+
 
 
     return 0;
