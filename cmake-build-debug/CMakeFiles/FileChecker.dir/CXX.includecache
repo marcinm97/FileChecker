@@ -19,6 +19,10 @@ string
 -
 functional
 -
+fstream
+-
+optional
+-
 
 C:/Users/Marcin/CLionProjects/FileChecker/main.cpp
 iostream

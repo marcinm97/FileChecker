@@ -1,0 +1,12 @@
+ +  "C:\\Users\\Marcin\\CLionProjects\\FileChecker\\cmake-build-debug\\Nowy dokument tekstowy.txt"		Thu Apr 18 00:54:26 2019
+
+ +  "C:\\Users\\Marcin\\CLionProjects\\FileChecker\\cmake-build-debug\\Nowy dokument tekstowy.txt"		Thu Apr 18 00:54:26 2019
+
+ +  "C:\\Users\\Marcin\\CLionProjects\\FileChecker\\cmake-build-debug\\changes.txt"		Thu Apr 18 00:54:34 2019
+
+ +  "C:\\Users\\Marcin\\CLionProjects\\FileChecker\\cmake-build-debug\\fv.txt"		Thu Apr 18 00:54:26 2019
+
+ +  "C:\\Users\\Marcin\\CLionProjects\\FileChecker\\cmake-build-debug\\fv.txt"		Thu Apr 18 00:55:33 2019
+
+ +  "C:\\Users\\Marcin\\CLionProjects\\FileChecker\\cmake-build-debug\\fv.txt"		Thu Apr 18 00:55:33 2019
+
