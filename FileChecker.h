@@ -13,6 +13,19 @@
 enum class State {Created, Modified, Removed};
 using namespace std::experimental;
 
+inline std::string stateToString(State type){
+    switch(type){
+        case State::Created:
+            return "File created: ";
+        case State::Modified:
+            return "File modified: ";
+        case State::Removed:
+            return "File removed: ";
+        default:
+            return "Unknown file status.\n";
+    }
+}
+
 class FileChecker{
 private:
     std::unordered_map<std::string, filesystem::file_time_type> paths_;
@@ -28,7 +41,7 @@ private:
         return paths_.find(file_name) != paths_.end();
     }
 
-    void saveToFile(const std::string& file_name, const std::pair<filesystem::path, time_t>& info){
+    void saveToFile(const std::string& file_name, const std::tuple<filesystem::path, time_t, std::string>& info){
 
         try{
             if(!alert_file) { // if alert_file is std::nullopt
@@ -37,8 +50,8 @@ private:
                 alert_file->open(file_name, std::ios::app);
 
             if (alert_file->is_open()) {
-                *alert_file <<" +  " << info.first << "\t\t" << std::asctime(std::localtime(&info.second))<<"\n";
-                //*alert_file << "Marcin Mucha\n";
+                *alert_file <<" +  " << std::get<2>(info) << "\t" << std::get<0>(info) << "\t"
+                        << std::asctime(std::localtime(&std::get<1>(info))) <<"\n";
             }
 
             alert_file->close();
@@ -72,7 +85,9 @@ public:
 
                 if(!filesystem::exists(file)){
                     validate(file, State::Removed);
-                    if(ifSave) saveToFile(fileToSave, std::make_pair(file, time::to_time_t(mod_data)));
+                    if(ifSave)
+                        saveToFile(fileToSave, std::make_tuple(file, time::to_time_t(mod_data), stateToString(State::Removed)));
+
                     paths_.erase(it++);
                 } else it++;
             }
@@ -80,13 +95,11 @@ public:
             for(auto& file: filesystem::recursive_directory_iterator(main_path)){
                 auto lastWriteTime(filesystem::last_write_time(file));
 
-                //saveToFile("changes.txt", std::make_pair(file.path().string(), std::chrono::system_clock::to_time_t(lastWriteTime)));
-
                 if(auto s(file.path().string()); !contains(s)){     // check if file was created
                     paths_.insert({s,lastWriteTime});
 
                     if(ifSave)
-                        saveToFile(fileToSave, std::make_pair(file.path().string(),time::to_time_t(lastWriteTime)));
+                        saveToFile(fileToSave, std::make_tuple(file.path().string(),time::to_time_t(lastWriteTime), stateToString(State::Created)));
 
                     validate(s,State::Created);
                 }else{                                              // check if file was modificated
@@ -94,7 +107,7 @@ public:
                         paths_[s] = lastWriteTime;
 
                         if(auto p(filesystem::current_path()/fileToSave); ifSave && s != p.string())
-                            saveToFile(fileToSave, std::make_pair(file.path().string(),time::to_time_t(lastWriteTime)));
+                            saveToFile(fileToSave, std::make_tuple(file.path().string(),time::to_time_t(lastWriteTime), stateToString(State::Modified)));
 
                         validate(s,State::Modified);
                     }

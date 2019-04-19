@@ -24,20 +24,8 @@ using namespace std::experimental;
 //        if(!filesystem::is_regular_file(filesystem::path(path_)) && type_of_change != State::Removed){
 //            return;
 //        }
+        std::cout << stateToString(type_of_change) << path_ <<"\n";
 
-        switch(type_of_change){
-            case State::Created:
-                std::cout<<"File created: "<< path_ <<"\n";
-                break;
-            case State::Modified:
-                std::cout<<"File modified: "<< path_ <<"\n";
-                break;
-            case State::Removed:
-                std::cout<<"File removed: "<< path_<< "\n";
-                break;
-            default:
-                std::cout<<"Unknown file status.\n";
-        }
     });
 
     monit.startChecking(disp_Alert);
