@@ -9,6 +9,7 @@
 #include <functional>
 #include <fstream>
 #include <optional>
+#include <set>
 
 enum class State {Created, Modified, Removed};
 using namespace std::experimental;
@@ -65,6 +66,7 @@ private:
     }
 public:
     using time = std::chrono::system_clock;
+    using extens = std::set<std::string>;
 
     FileChecker(const std::string& file_path, std::chrono::duration<int, std::milli> delay, bool saveToFile = false): main_path(file_path),
         delay_(delay), alert_file(std::nullopt), ifSave(saveToFile){
@@ -115,6 +117,17 @@ public:
             }
         }
     }
+
+    extens getSetOfExtensions(){                 // return current available extensions
+        std::set<std::string> ext;
+
+        for(const auto& file: filesystem::directory_iterator(main_path)){
+            if(!filesystem::is_directory(file))
+                ext.insert(file.path().extension().string());
+        }
+        return ext;
+    }
+
 
 };
 
